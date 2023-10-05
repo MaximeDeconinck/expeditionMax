@@ -1,0 +1,48 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="{% static 'index.css' %}" rel="stylesheet">
+    <title>expeditionMax</title>
+</head>
+<nav>
+    <ul>
+        <li><a href="{% url 'index' %}"><img src="{% static 'expeditionMax_logo.png' %}"></a></li>
+        <li><a href="{% url 'travels' %}">Travels</a></li>
+        <li><a href="{% url 'expeditions' %}">Expeditions</a></li>
+        <li><a href="{% url 'search_expeditions' %}">Search</a></li>
+    </ul>
+</nav>
+<body>
+    <h1>{{ count }} possible expeditions</h1>
+    <form method='GET' action="{% url 'calculate_expeditions' %}">
+        <button>Calculate expeditions from travels</button>
+    </form>
+    <form method='GET' action="{% url 'delete_expeditions' %}">
+        <button>Delete expeditions</button>
+    </form>
+    {% if expeditions %}
+        <ul>
+            {% for expedition in expeditions %}
+                <li>
+                    <strong>{{ expedition.travel_go.origine }} - {{ expedition.travel_go.destination }}</strong><br>
+
+                    <strong>Voyage aller:</strong><br>
+                    <strong>Date:</strong> {{ expedition.travel_go.date }}<br>
+                    <strong>Heure de départ:</strong> {{ expedition.travel_go.heure_depart }}<br>
+                    <strong>Heure d'arrivée:</strong> {{ expedition.travel_go.heure_arrivee }}<br>
+                
+                    <strong>Voyage retour:</strong><br>
+                    <strong>Date:</strong> {{ expedition.travel_back.date }}<br>
+                    <strong>Heure de départ:</strong> {{ expedition.travel_back.heure_depart }}<br>
+                    <strong>Heure d'arrivée:</strong> {{ expedition.travel_back.heure_arrivee }}<br>
+                    <br>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Aucune expédition disponible.</p>
+    {% endif %}
+</body>
+</html>

@@ -1,0 +1,26 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="{% static 'index.css' %}" rel="stylesheet">
+    <title>expeditionMax</title>
+</head>
+<nav>
+    <ul>
+        <li><a href="{% url 'index' %}"><img src="{% static 'expeditionMax_logo.png' %}"></a></li>
+        <li><a href="{% url 'travels' %}">Travels</a></li>
+        <li><a href="{% url 'expeditions' %}">Expeditions</a></li>
+        <li><a href="{% url 'search_expeditions' %}">Search</a></li>
+    </ul>
+</nav>
+<body>
+    <h1>expeditionMax</h1>
+    <form method='GET' action="{% url 'travels' %}">
+        <button>See travels available</button>
+    </form>
+    <form method='GET' action="{% url 'expeditions' %}">
+        <button>See possible expeditions</button>
+    </form>
+</body>
+</html>
